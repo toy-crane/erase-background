@@ -24,6 +24,7 @@ export default function Home() {
     if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = () => {
+        console.log("loadded");
         setCurrentImageSrc(reader.result as string);
       };
       reader.readAsDataURL(selectedFile);
@@ -74,7 +75,7 @@ export default function Home() {
     if (removedImage?.blob) {
       const fileExtension = selectedFile?.name.split(".").pop();
       const fileName = selectedFile?.name.replace(`.${fileExtension}`, "");
-      const fileNameWithExtension = `${fileName}removed.${fileExtension}`;
+      const fileNameWithExtension = `${fileName}_removed.${fileExtension}`;
       saveAs(removedImage?.blob, fileNameWithExtension);
     }
   };

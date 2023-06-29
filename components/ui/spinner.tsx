@@ -1,7 +1,7 @@
 const Spinner = () => (
   <div
     id="loading"
-    className="fixed inset-0 z-50 flex items-center justify-center h-100vh bg-transparent bg-gray-50/30"
+    className="fixed inset-0 z-50 flex items-center justify-center h-100vh bg-gray-200/50"
   >
     <div
       className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] text-gray-500"
