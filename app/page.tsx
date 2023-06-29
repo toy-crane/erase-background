@@ -6,11 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { saveAs } from "file-saver";
 
-import imglyRemoveBackground from "@imgly/background-removal";
-
 import { ChangeEvent, useState, MouseEvent, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File>();
@@ -41,10 +40,12 @@ export default function Home() {
     }
   };
 
-  const fileUploadHandler = (event: MouseEvent<HTMLButtonElement>) => {
+  const fileUploadHandler = async (event: MouseEvent<HTMLButtonElement>) => {
     setLoading(true);
     event.preventDefault();
     if (selectedFile) {
+      const imglyRemoveBackground = (await import("@imgly/background-removal"))
+        .default;
       imglyRemoveBackground(selectedFile, {
         publicPath: "/",
         debug: true,
@@ -73,7 +74,7 @@ export default function Home() {
     if (removedImage?.blob) {
       const fileExtension = selectedFile?.name.split(".").pop();
       const fileName = selectedFile?.name.replace(`.${fileExtension}`, "");
-      const fileNameWithExtension = `${fileName}_background_removed.${fileExtension}`;
+      const fileNameWithExtension = `${fileName}removed.${fileExtension}`;
       saveAs(removedImage?.blob, fileNameWithExtension);
     }
   };
