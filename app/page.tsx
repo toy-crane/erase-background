@@ -99,10 +99,15 @@ export default function Home() {
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="picture">배경을 제거할 이미지를 업로드 해주세요.</Label>
-        <Input id="picture" type="file" onChange={fileSelectedHandler} />
+        <Input
+          id="picture"
+          type="file"
+          onChange={fileSelectedHandler}
+          className="display"
+        />
         {!removedImage?.src && (
           <Button type="submit" onClick={fileUploadHandler}>
-            배경 제거하기
+            배경 제거하기 (1분 정도 소요)
           </Button>
         )}
         {removedImage?.src && (
