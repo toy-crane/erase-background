@@ -58,7 +58,7 @@ const LoadingButton = () => {
   return (
     <Button disabled>
       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-      Please wait
+      배경 제거중입니다
     </Button>
   );
 };
