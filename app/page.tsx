@@ -100,6 +100,7 @@ export default function Home() {
         <Input
           id="picture"
           type="file"
+          accept="image/jpeg,image/png"
           onChange={fileSelectedHandler}
           className="display"
         />
