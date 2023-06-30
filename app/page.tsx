@@ -2,14 +2,11 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
+import { Button, LoadingButton } from "@/components/ui/button";
 import { saveAs } from "file-saver";
 
 import { ChangeEvent, useState, MouseEvent, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import dynamic from "next/dynamic";
 
 export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File>();
@@ -81,7 +78,10 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center mx-24 my-12">
+    <main className="flex max-h-screen max-w-md flex-col items-center my-12 mx-auto">
+      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 mb-4">
+        배경화면 깔끔하게 제거하기
+      </h2>
       <div className="w-[450px] h-[450px] bg-gray-50 mb-12 flex p-4">
         {currentImageSrc && (
           <div className={"relative w-[450px]"}>
@@ -97,7 +97,7 @@ export default function Home() {
           </div>
         )}
       </div>
-      <div className="grid w-full max-w-sm items-center gap-1.5">
+      <div className="grid w-full items-center gap-1.5">
         <Label htmlFor="picture">배경을 제거할 이미지를 업로드 해주세요.</Label>
         <Input
           id="picture"
@@ -105,15 +105,19 @@ export default function Home() {
           onChange={fileSelectedHandler}
           className="display"
         />
-        {!removedImage?.src && (
-          <Button type="submit" onClick={fileUploadHandler}>
-            배경 제거하기 (1분 정도 소요)
+        {!removedImage?.src &&
+          (loading ? (
+            <LoadingButton />
+          ) : (
+            <Button type="submit" onClick={fileUploadHandler}>
+              배경 제거하기
+            </Button>
+          ))}
+        {removedImage?.src && (
+          <Button onClick={handleDownload} className="w-full">
+            이미지 다운로드
           </Button>
         )}
-        {removedImage?.src && (
-          <Button onClick={handleDownload}>이미지 다운로드</Button>
-        )}
-        {loading && <Spinner />}
       </div>
     </main>
   );
