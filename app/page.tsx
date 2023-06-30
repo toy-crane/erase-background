@@ -78,11 +78,11 @@ export default function Home() {
   };
 
   return (
-    <main className="flex max-h-screen max-w-md flex-col items-center my-12 mx-auto">
-      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 mb-4">
+    <main className="w-full mx-auto max-w-lg px-4 sm:px-6 lg:px-8 pt-8">
+      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 mb-4 text-center">
         배경화면 깔끔하게 제거하기
       </h2>
-      <div className="w-[450px] h-[450px] bg-gray-50 mb-12 flex p-4">
+      <div className="w-full h-[450px] bg-gray-50 mb-12 flex p-4">
         {currentImageSrc && (
           <div className={"relative w-[450px]"}>
             <Image
