@@ -3,6 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button, LoadingButton } from "@/components/ui/button";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { saveAs } from "file-saver";
 
 import { ChangeEvent, useState, MouseEvent, useEffect } from "react";
@@ -79,23 +80,20 @@ export default function Home() {
 
   return (
     <main className="w-full mx-auto max-w-lg px-4 sm:px-6 lg:px-8 pt-8">
-      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 mb-4 text-center">
+      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-center">
         배경화면 깔끔하게 제거하기
       </h2>
-      <div className="w-full h-[450px] bg-gray-50 mb-12 flex p-4">
-        {currentImageSrc && (
-          <div className={"relative w-[450px]"}>
+      <div className="w-full mb-12 flex p-4">
+        <AspectRatio className="bg-gray-50">
+          {currentImageSrc && (
             <Image
               alt="removed image"
               src={currentImageSrc}
               fill
-              sizes="100vw"
-              style={{
-                objectFit: "contain",
-              }}
+              className="rounded-md object-contain"
             />
-          </div>
-        )}
+          )}
+        </AspectRatio>
       </div>
       <div className="grid w-full items-center gap-1.5">
         <Label htmlFor="picture">배경을 제거할 이미지를 업로드 해주세요.</Label>
