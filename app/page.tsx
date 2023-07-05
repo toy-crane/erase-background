@@ -4,8 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button, LoadingButton } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { saveAs } from "file-saver";
-
 import { ChangeEvent, useState, MouseEvent, useEffect } from "react";
 import Image from "next/image";
 
@@ -17,6 +17,7 @@ export default function Home() {
   }>();
   const [loading, setLoading] = useState<boolean>(false);
   const [currentImageSrc, setCurrentImageSrc] = useState<string>("");
+  const [quality, setQuality] = useState<"small" | "medium">("small");
 
   useEffect(() => {
     if (selectedFile) {
@@ -48,7 +49,7 @@ export default function Home() {
       imglyRemoveBackground(selectedFile, {
         publicPath: "/",
         debug: true,
-        model: "medium",
+        model: quality,
         proxyToWorker: true,
         fetchArgs: {
           mode: "no-cors",
@@ -83,7 +84,7 @@ export default function Home() {
       <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-center">
         배경화면 깔끔하게 제거하기
       </h2>
-      <div className="w-full mb-12 flex p-4">
+      <div className="w-full flex py-4">
         <AspectRatio className="bg-gray-50">
           {currentImageSrc && (
             <Image
@@ -95,6 +96,19 @@ export default function Home() {
           )}
         </AspectRatio>
       </div>
+      <div className="mb-4">
+        <Tabs
+          defaultValue="small"
+          className="w-[400px]"
+          onValueChange={(value) => setQuality(value as "small" | "medium")}
+        >
+          <TabsList>
+            <TabsTrigger value="small">저해상도</TabsTrigger>
+            <TabsTrigger value="medium">고해상도</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
+
       <div className="grid w-full items-center gap-1.5">
         <Label htmlFor="picture">배경을 제거할 이미지를 업로드 해주세요.</Label>
         <Input
