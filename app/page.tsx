@@ -4,10 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button, LoadingButton } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { saveAs } from "file-saver";
 import { ChangeEvent, useState, MouseEvent, useEffect, useRef } from "react";
 import Image from "next/image";
+import { Upload } from "lucide-react";
 
 export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File>();
@@ -19,6 +20,7 @@ export default function Home() {
   const [currentImageSrc, setCurrentImageSrc] = useState<string>("");
   const [quality, setQuality] = useState<"small" | "medium">("small");
   const hiddenInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     hiddenInputRef.current?.focus();
@@ -106,6 +108,17 @@ export default function Home() {
     }
   };
 
+  const handleUploadBtnClick = () => {
+    // trigger the click event of the hidden file input
+    fileInputRef.current?.click();
+  };
+
+  const handleReset = () => {
+    setRemovedImage(undefined);
+    setCurrentImageSrc("");
+    setSelectedFile(undefined);
+  };
+
   return (
     <main className="w-full mx-auto max-w-lg px-4 sm:px-6 lg:px-8 pt-8">
       <input
@@ -118,14 +131,41 @@ export default function Home() {
         배경화면 깔끔하게 제거하기
       </h2>
       <div className="w-full flex py-4">
-        <AspectRatio className="bg-gray-50">
-          {currentImageSrc && (
+        <AspectRatio className="bg-gray-50 flex justify-center items-center flex-col">
+          {currentImageSrc ? (
             <Image
               alt="removed image"
               src={currentImageSrc}
               fill
               className="rounded-md object-contain"
             />
+          ) : (
+            <>
+              <Button
+                size="icon"
+                variant="outline"
+                onClick={handleUploadBtnClick}
+              >
+                <Upload className="h-4 w-4" />
+              </Button>
+              <Label
+                htmlFor="necessary"
+                className="flex flex-col space-y-1 my-2"
+              >
+                <span className="font-normal leading-snug text-muted-foreground text-center">
+                  control + v 로 파일을 쉽게 붙여 넣어 보세요 <br />
+                  png, jpeg 파일만 가능합니다
+                </span>
+              </Label>
+              <Input
+                id="picture"
+                type="file"
+                ref={fileInputRef}
+                accept="image/jpeg,image/png"
+                onChange={fileSelectedHandler}
+                className="hidden"
+              />
+            </>
           )}
         </AspectRatio>
       </div>
@@ -143,14 +183,6 @@ export default function Home() {
       </div>
 
       <div className="grid w-full items-center gap-1.5">
-        <Label htmlFor="picture">배경을 제거할 이미지를 업로드 해주세요.</Label>
-        <Input
-          id="picture"
-          type="file"
-          accept="image/jpeg,image/png"
-          onChange={fileSelectedHandler}
-          className="display"
-        />
         {!removedImage?.src &&
           (loading ? (
             <LoadingButton />
@@ -160,9 +192,14 @@ export default function Home() {
             </Button>
           ))}
         {removedImage?.src && (
-          <Button onClick={handleDownload} className="w-full">
-            이미지 다운로드
-          </Button>
+          <>
+            <Button onClick={handleDownload} className="w-full">
+              이미지 다운로드
+            </Button>
+            <Button variant="outline" onClick={handleReset} className="w-full">
+              다른 이미지 업로드하기
+            </Button>
+          </>
         )}
       </div>
     </main>
