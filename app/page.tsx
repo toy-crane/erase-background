@@ -82,6 +82,7 @@ export default function Home() {
       saveAs(removedImage?.blob, fileNameWithExtension);
     }
   };
+
   const handlePaste = (e: React.ClipboardEvent) => {
     e.preventDefault();
     if (!e.clipboardData || e.clipboardData.items.length === 0) {
@@ -89,10 +90,19 @@ export default function Home() {
     }
     const items = e.clipboardData.items;
     const item = items[items.length - 1];
-    if (item.kind === "file" && item.getAsFile()) {
-      setRemovedImage(undefined);
-      setCurrentImageSrc("");
-      setSelectedFile(item.getAsFile() as File);
+    if (item.kind === "file") {
+      const file = item.getAsFile();
+      const isImage = file && /^image\/(jpeg|png)$/.test(file.type);
+      if (isImage) {
+        console.log("it is images");
+        setRemovedImage(undefined);
+        setCurrentImageSrc("");
+        setSelectedFile(item.getAsFile() as File);
+      } else {
+        console.log("Only PNG and JPEG images are supported.");
+      }
+    } else {
+      console.log("Only PNG and JPEG images are supported.");
     }
   };
 
