@@ -102,7 +102,7 @@ export default function Home() {
         type="text"
         ref={hiddenInputRef}
         onPaste={handlePaste}
-        style={{ position: "absolute", left: "-9999px" }}
+        className="absolute left-[-9999px]"
       />
       <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-center">
         배경화면 깔끔하게 제거하기
