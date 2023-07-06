@@ -6,7 +6,7 @@ import { Button, LoadingButton } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { saveAs } from "file-saver";
-import { ChangeEvent, useState, MouseEvent, useEffect } from "react";
+import { ChangeEvent, useState, MouseEvent, useEffect, useRef } from "react";
 import Image from "next/image";
 
 export default function Home() {
@@ -18,12 +18,16 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(false);
   const [currentImageSrc, setCurrentImageSrc] = useState<string>("");
   const [quality, setQuality] = useState<"small" | "medium">("small");
+  const hiddenInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    hiddenInputRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        console.log("loadded");
         setCurrentImageSrc(reader.result as string);
       };
       reader.readAsDataURL(selectedFile);
@@ -78,9 +82,28 @@ export default function Home() {
       saveAs(removedImage?.blob, fileNameWithExtension);
     }
   };
+  const handlePaste = (e: React.ClipboardEvent) => {
+    e.preventDefault();
+    if (!e.clipboardData || e.clipboardData.items.length === 0) {
+      return;
+    }
+    const items = e.clipboardData.items;
+    const item = items[items.length - 1];
+    if (item.kind === "file" && item.getAsFile()) {
+      setRemovedImage(undefined);
+      setCurrentImageSrc("");
+      setSelectedFile(item.getAsFile() as File);
+    }
+  };
 
   return (
     <main className="w-full mx-auto max-w-lg px-4 sm:px-6 lg:px-8 pt-8">
+      <input
+        type="text"
+        ref={hiddenInputRef}
+        onPaste={handlePaste}
+        style={{ position: "absolute", left: "-9999px" }}
+      />
       <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-center">
         배경화면 깔끔하게 제거하기
       </h2>
@@ -103,8 +126,8 @@ export default function Home() {
           onValueChange={(value) => setQuality(value as "small" | "medium")}
         >
           <TabsList>
-            <TabsTrigger value="small">저해상도</TabsTrigger>
-            <TabsTrigger value="medium">고해상도</TabsTrigger>
+            <TabsTrigger value="small">저화질</TabsTrigger>
+            <TabsTrigger value="medium">고화질</TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
