@@ -41,8 +41,6 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
   const hiddenInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  console.log(error);
-
   useEffect(() => {
     hiddenInputRef.current?.focus();
   }, []);
@@ -117,7 +115,6 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
       const file = item.getAsFile();
       const isImage = file && /^image\/(jpeg|png)$/.test(file.type);
       if (isImage) {
-        console.log("it is images");
         setRemovedImage(undefined);
         setCurrentImageSrc("");
         setSelectedFile(item.getAsFile() as File);
