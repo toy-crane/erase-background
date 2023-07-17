@@ -139,13 +139,13 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
 
   return (
     <>
-      <input
-        type="text"
-        ref={hiddenInputRef}
-        onPaste={handlePaste}
-        className="absolute left-[-9999px]"
-      />
       <div className="w-full flex py-4">
+        <input
+          type="text"
+          ref={hiddenInputRef}
+          onPaste={handlePaste}
+          className="absolute left-[-9999px]"
+        />
         <AspectRatio className="bg-gray-50 flex justify-center items-center flex-col">
           {currentImageSrc ? (
             <Image
@@ -156,12 +156,8 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
             />
           ) : (
             <>
-              <Button
-                size="icon"
-                variant="outline"
-                onClick={handleUploadBtnClick}
-              >
-                <Upload className="h-4 w-4" />
+              <Button size="lg" onClick={handleUploadBtnClick}>
+                이미지 업로드
               </Button>
               <Label
                 htmlFor="necessary"
@@ -186,8 +182,8 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
       </div>
       {error ? (
         <AlertDestructive error={error} />
-      ) : (
-        <>
+      ) : selectedFile ? (
+        <div>
           <div className="mb-4">
             <Tabs
               defaultValue="small"
@@ -200,7 +196,6 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
               </TabsList>
             </Tabs>
           </div>
-
           <div className="grid w-full items-center gap-1.5">
             {!removedImage?.src &&
               (loading ? (
@@ -225,8 +220,8 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
               </>
             )}
           </div>
-        </>
-      )}
+        </div>
+      ) : null}
     </>
   );
 }
