@@ -8,7 +8,6 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { saveAs } from "file-saver";
 import { ChangeEvent, useState, MouseEvent, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Upload } from "lucide-react";
 
 import { AlertCircle } from "lucide-react";
 
