@@ -18,7 +18,7 @@ export async function GET() {
           alignItems: "center",
         }}
       >
-        <div>✂️ 🖼️</div>
+        ✂️ 🖼️
       </div>
     ),
     {
