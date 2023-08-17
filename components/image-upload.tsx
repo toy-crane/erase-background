@@ -169,8 +169,7 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
                 className="flex flex-col space-y-1 my-2"
               >
                 <span className="font-normal leading-snug text-muted-foreground text-center">
-                  control + v 로 파일을 쉽게 붙여 넣어 보세요 <br />
-                  png, jpeg 파일만 가능합니다
+                  Control + V를 사용하여 붙여 넣기도 가능합니다
                 </span>
               </Label>
               <Input
