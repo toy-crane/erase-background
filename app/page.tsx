@@ -4,6 +4,7 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
+import { SiteFooter } from "@/components/site-footer";
 import { headers } from "next/headers";
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
         </PageHeaderDescription>
       </PageHeader>
       <ImageUpload isSafari={isSafari} />
+      <SiteFooter />
     </main>
   );
 }
