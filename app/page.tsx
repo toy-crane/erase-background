@@ -1,4 +1,9 @@
 import ImageUpload from "@/components/image-upload";
+import {
+  PageHeader,
+  PageHeaderDescription,
+  PageHeaderHeading,
+} from "@/components/page-header";
 import { headers } from "next/headers";
 
 export default function Home() {
@@ -8,10 +13,17 @@ export default function Home() {
   const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent as string);
 
   return (
-    <main className="w-full mx-auto max-w-lg px-4 sm:px-6 lg:px-8 pt-8">
-      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-center">
-        배경화면 깔끔하게 제거하기
-      </h2>
+    <main className="w-full mx-auto container px-4 sm:px-6 lg:px-8">
+      <PageHeader className="my-1">
+        <PageHeaderHeading className="mb-4">
+          클릭 한 번으로 <br />
+          사진에서 배경화면을 제거하세요!
+        </PageHeaderHeading>
+        <PageHeaderDescription>
+          JPEG과 PNG 이미지에서 AI를 활용하여 빠르게 배경화면을 제거합니다.
+          <br />그 어떤 경우에도 사진은 서버에 저장되지 않습니다.
+        </PageHeaderDescription>
+      </PageHeader>
       <ImageUpload isSafari={isSafari} />
     </main>
   );

@@ -1,8 +1,8 @@
 import { AmplitudeProvider } from "@/lib/amplitude";
 import "./globals.css";
 import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { cn } from "@/lib/utils";
+import SiteHeader from "@/components/site-header";
 
 export const metadata = {
   title: "배경화면 깔끔하게 지우기",
@@ -17,7 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AmplitudeProvider apiKey={process.env.AMPLITUDE_KEY as string}>
-        <body className={inter.className}>{children}</body>
+        <body
+          className={cn("min-h-screen bg-background font-sans antialiased")}
+        >
+          <div className="relative flex min-h-screen flex-col">{children}</div>
+        </body>
       </AmplitudeProvider>
     </html>
   );
