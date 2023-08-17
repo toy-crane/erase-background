@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@amplitude/analytics-browser':
+    specifier: ^2.2.0
+    version: 2.2.0
   '@imgly/background-removal':
     specifier: ^1.0.2
     version: 1.0.2
@@ -84,6 +87,9 @@ devDependencies:
   '@types/file-saver':
     specifier: ^2.0.5
     version: 2.0.5
+  '@types/gtag.js':
+    specifier: ^0.0.13
+    version: 0.0.13
 
 packages:
 
@@ -95,6 +101,58 @@ packages:
   /@alloc/quick-lru@5.2.0:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
+    dev: false
+
+  /@amplitude/analytics-browser@2.2.0:
+    resolution: {integrity: sha512-gCRnvXT5FDmaXbrmDVdVLbm7ubYgpQX2dRnA3R8uPfqw3YGXszueVxTPKYuMf0fdQ3+1N9RcPmyEycpywN9vKg==}
+    dependencies:
+      '@amplitude/analytics-client-common': 2.0.4
+      '@amplitude/analytics-core': 2.0.3
+      '@amplitude/analytics-types': 2.1.1
+      '@amplitude/plugin-page-view-tracking-browser': 2.0.6
+      '@amplitude/plugin-web-attribution-browser': 2.0.6
+      tslib: 2.6.0
+    dev: false
+
+  /@amplitude/analytics-client-common@2.0.4:
+    resolution: {integrity: sha512-X0+zE8sODcQ2ioj9ZB98Gr/9FCRDiJuSixefaLrfng/4x5VwHK0if8biCqqBHXu6HlMpeMFrCyiABUTDT87QVA==}
+    dependencies:
+      '@amplitude/analytics-connector': 1.4.8
+      '@amplitude/analytics-core': 2.0.3
+      '@amplitude/analytics-types': 2.1.1
+      tslib: 2.6.0
+    dev: false
+
+  /@amplitude/analytics-connector@1.4.8:
+    resolution: {integrity: sha512-dFW7c7Wb6Ng7vbmzwbaXZSpqfBx37ukamJV9ErFYYS8vGZK/Hkbt3M7fZHBI4WFU6CCwakr2ZXPme11uGPYWkQ==}
+    dev: false
+
+  /@amplitude/analytics-core@2.0.3:
+    resolution: {integrity: sha512-tpD1gCmPpzPNPumQT1ecOJtuan5OsQdKp9AX8YKc7t1/K3xHzGo3FH3JvdaAJVYYWeZV40bp/JL6wJiYIzyZjA==}
+    dependencies:
+      '@amplitude/analytics-types': 2.1.1
+      tslib: 2.6.0
+    dev: false
+
+  /@amplitude/analytics-types@2.1.1:
+    resolution: {integrity: sha512-H3vebPR9onRdp0WzAZmI/4qmAE903uLOd2ZfMeHsVc1zaFTTCk46SoCuV4IrlF+VILrDw9Fy6gC9yl5N2PZcJQ==}
+    dev: false
+
+  /@amplitude/plugin-page-view-tracking-browser@2.0.6:
+    resolution: {integrity: sha512-V8ef24E+KYINQf1o9MQnkmhFmQHGD5lb6mlTH8jGD2PdUe/KDXdO4S4rpBewxcrAfUH+iEqEanbVnTWpg6iPnw==}
+    dependencies:
+      '@amplitude/analytics-client-common': 2.0.4
+      '@amplitude/analytics-types': 2.1.1
+      tslib: 2.6.0
+    dev: false
+
+  /@amplitude/plugin-web-attribution-browser@2.0.6:
+    resolution: {integrity: sha512-+WQuhHJn7ZsYaTMe6iPE081b6y2oe9m+W/eZW+Lyf99Vt3rntDVYZIgZVwwds0s2SsUBcSvYFu1JgS65NfxWNQ==}
+    dependencies:
+      '@amplitude/analytics-client-common': 2.0.4
+      '@amplitude/analytics-core': 2.0.3
+      '@amplitude/analytics-types': 2.1.1
+      tslib: 2.6.0
     dev: false
 
   /@babel/runtime@7.22.5:
@@ -667,6 +725,10 @@ packages:
 
   /@types/file-saver@2.0.5:
     resolution: {integrity: sha512-zv9kNf3keYegP5oThGLaPk8E081DFDuwfqjtiTzm6PoxChdJ1raSuADf2YGCVIyrSynLrgc8JWv296s7Q7pQSQ==}
+    dev: true
+
+  /@types/gtag.js@0.0.13:
+    resolution: {integrity: sha512-yOXFkfnt1DQr1v9B4ERulJOGnbdVqnPHV8NG4nkQhnu4qbrJecQ06DlaKmSjI3nzIwBj5U9/X61LY4sTc2KbaQ==}
     dev: true
 
   /@types/json5@0.0.29:

@@ -12,6 +12,7 @@ import Image from "next/image";
 import { AlertCircle } from "lucide-react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useAmplitude } from "@/lib/amplitude";
 
 export function AlertDestructive({ error }: { error: string }) {
   return (
@@ -39,6 +40,7 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
   );
   const hiddenInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { track } = useAmplitude();
 
   useEffect(() => {
     hiddenInputRef.current?.focus();
@@ -67,6 +69,7 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
   const fileUploadHandler = async (event: MouseEvent<HTMLButtonElement>) => {
     setLoading(true);
     event.preventDefault();
+    track("remove bg btn clicked");
     if (selectedFile) {
       const imglyRemoveBackground = (await import("@imgly/background-removal"))
         .default;
@@ -95,6 +98,7 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
   };
 
   const handleDownload = async () => {
+    track("douwnload btn clicked");
     if (removedImage?.blob) {
       const fileExtension = selectedFile?.name.split(".").pop();
       const fileName = selectedFile?.name.replace(`.${fileExtension}`, "");
@@ -128,9 +132,11 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
   const handleUploadBtnClick = () => {
     // trigger the click event of the hidden file input
     fileInputRef.current?.click();
+    track("upload btn clicked");
   };
 
   const handleReset = () => {
+    track("reset btn clicked");
     setRemovedImage(undefined);
     setCurrentImageSrc("");
     setSelectedFile(undefined);
@@ -187,7 +193,10 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
             <Tabs
               defaultValue="small"
               className="w-[400px]"
-              onValueChange={(value) => setQuality(value as "small" | "medium")}
+              onValueChange={(value) => {
+                track(`${value} quality tab clicked`);
+                setQuality(value as "small" | "medium");
+              }}
             >
               <TabsList>
                 <TabsTrigger value="small">저화질</TabsTrigger>
