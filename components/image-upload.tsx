@@ -151,7 +151,7 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
           onPaste={handlePaste}
           className="absolute left-[-9999px]"
         />
-        <AspectRatio className="bg-gray-50 flex justify-center items-center flex-col">
+        <AspectRatio className="bg-gray-50 flex justify-center items-center flex-col rounded-md">
           {currentImageSrc ? (
             <Image
               alt="removed image"
