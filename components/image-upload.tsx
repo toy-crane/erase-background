@@ -24,7 +24,7 @@ export function AlertDestructive({ error }: { error: string }) {
   );
 }
 
-export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
+export default function ImageUpload() {
   const [selectedFile, setSelectedFile] = useState<File>();
   const [removedImage, setRemovedImage] = useState<{
     blob?: Blob;
@@ -33,11 +33,7 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [currentImageSrc, setCurrentImageSrc] = useState<string>("");
   const [quality, setQuality] = useState<"small" | "medium">("small");
-  const [error, setError] = useState<string | undefined>(
-    isSafari
-      ? "safari는 이 기능이 지원되지 않습니다. chrome 혹은 edge 브라우저를 사용해 주세요."
-      : undefined
-  );
+  const [error, setError] = useState<string | undefined>(undefined);
   const hiddenInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { track } = useAmplitude();
@@ -144,7 +140,7 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
 
   return (
     <>
-      <div className="w-full flex py-4">
+      <div className="w-full">
         <input
           type="text"
           ref={hiddenInputRef}
@@ -188,7 +184,7 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
         <AlertDestructive error={error} />
       ) : selectedFile ? (
         <div>
-          <div className="mb-4">
+          <div className="my-2">
             <Tabs
               defaultValue="small"
               className="w-[400px]"
@@ -203,7 +199,7 @@ export default function ImageUpload({ isSafari }: { isSafari: boolean }) {
               </TabsList>
             </Tabs>
           </div>
-          <div className="grid w-full items-center gap-1.5">
+          <div className="grid w-full items-center gap-1.5 my-4">
             {!removedImage?.src &&
               (loading ? (
                 <LoadingButton />
