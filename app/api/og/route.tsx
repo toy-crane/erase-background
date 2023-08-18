@@ -7,18 +7,19 @@ export async function GET() {
     (
       <div
         style={{
-          fontSize: 100,
-          color: "black",
-          background: "white",
-          width: "100%",
           height: "100%",
-          padding: "50px 200px",
-          textAlign: "center",
-          justifyContent: "center",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
           alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#fff",
+          fontSize: 48,
+          fontWeight: 800,
         }}
       >
-        ✂️ 🖼️
+        <div style={{ fontSize: 124 }}>✂️ 🖼️</div>
+        <div style={{ marginTop: 36 }}>No more background</div>
       </div>
     ),
     {
