@@ -6,7 +6,6 @@ import {
 } from "@/components/page-header";
 import { SiteFooter } from "@/components/site-footer";
 
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { headers } from "next/headers";
 
 export default function Home() {
